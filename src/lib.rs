@@ -1,22 +1,14 @@
 #![no_std]
 #![no_main]
 
-use core::panic::PanicInfo;
+mod vga_buffer;
 
-static HELLO: &[u8] = b"First ever boot of Quecto OS :)";
+use core::panic::PanicInfo;
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    let vga_buffer = 0xb8000 as *mut u8;
-
-    loop {
-        for (i, &byte) in HELLO.iter().enumerate() {
-            unsafe {
-                *vga_buffer.offset(i as isize * 2) = byte;
-                *vga_buffer.offset(i as isize * 2 + 1) = 0xa;
-            }
-        }
-    }
+    vga_buffer::print_something();
+    loop {}
 }
 
 #[panic_handler]
