@@ -1,5 +1,5 @@
 arch ?= x86_64
-kernel := build/kernel-$(arch).bin
+kernel := build/quecto_kernel-$(arch).bin
 iso := build/quecto_os-$(arch).iso
 target ?= $(arch)-quecto_os
 rust_os := target/$(target)/debug/libquecto_os.a
