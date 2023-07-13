@@ -22,6 +22,9 @@ long_mode_start:
     mov rax, 0x2f4B2f4F2f202f3D
     mov qword [0xb8020], rax
 
+    mov edi, eax
+    mov esi, ebx
+
     extern _start
     call _start
 

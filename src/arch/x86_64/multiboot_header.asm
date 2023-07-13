@@ -13,3 +13,11 @@ header_start:
     dw 0    ; flags
     dd 8    ; size
 header_end:
+framebuffer_tag_start:
+    dw  0x05    ;Type: framebuffer
+    dw  0x01    ;Optional tag
+    dd  framebuffer_tag_end - framebuffer_tag_start ;size
+    dd  0   ;Width - if 0 we let the bootloader decide
+    dd  0   ;Height - same as above
+    dd  0   ;Depth  - same as above
+framebuffer_tag_end:
