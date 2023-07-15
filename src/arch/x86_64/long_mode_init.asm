@@ -10,7 +10,7 @@ long_mode_start:
     mov fs, ax
     mov gs, ax
 
-    ; print `OKAY` to screen
+    ; print `long mode entered = OK'
     mov rax, 0x2f672f6E2f6F2f6C
     mov qword [0xb8000], rax
     mov rax, 0x2f642f6F2f6D2f5f
@@ -25,6 +25,7 @@ long_mode_start:
     mov edi, eax
     mov esi, ebx
 
+    ; call the main kernel function in src/lib.rs
     extern _start
     call _start
 

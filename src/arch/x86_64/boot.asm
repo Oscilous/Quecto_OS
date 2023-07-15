@@ -12,10 +12,8 @@ start:
     call set_up_page_tables
     call enable_paging
 
-    lgdt [gdt64.pointer]
 
-    jmp gdt64.code:long_mode_start
-
+    ; Printing status of succesful init of 32bit
     mov dword [0xb8000], 0x2f652f48
     mov dword [0xb8004], 0x2f6c2f6c
     mov dword [0xb8008], 0x2f202f6f
@@ -26,6 +24,10 @@ start:
     mov dword [0xb801c], 0x2f742f63
     mov dword [0xb8020], 0x2f4f2f6f
     mov dword [0xb8024], 0x2f212f53
+
+    ; Entering 64bit mode (long mode)
+    lgdt [gdt64.pointer]
+    jmp gdt64.code:long_mode_start
     hlt
 
 error:
