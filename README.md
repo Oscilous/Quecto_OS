@@ -42,15 +42,15 @@ qemu-system-x86_64 -cdrom quecto_os-x86_64.iso
 
 ## Progress
 
-* [x] Long mode
-* [?] Framebuffer
-* [] Serial output
-* [] Interrupts
-* [] Timer peripheral
-* [] Memory management
-* [] Filesystem
-* [] Processes
-* [] Syscalls/User space
+* ✅ Long mode
+* 🚧 Framebuffer
+* ⬜️ Serial output
+* ⬜️ Interrupts
+* ⬜️ Timer peripheral
+* ⬜️ Memory management
+* ⬜️ Filesystem
+* ⬜️ Processes
+* ⬜️ Syscalls/User space
 
 ## Organization
 
