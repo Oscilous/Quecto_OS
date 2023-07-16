@@ -1,5 +1,9 @@
 global long_mode_start
 
+section .data
+    MAGIC_NUMBER dd 0
+    INFOSTRUCT_ADDRESS dd 0
+
 section .text
 bits 64
 long_mode_start:
@@ -22,8 +26,11 @@ long_mode_start:
     mov rax, 0x2f4B2f4F2f202f3D
     mov qword [0xb8020], rax
 
-    mov edi, eax
-    mov esi, ebx
+    ; Move the value of ebx into magic_number
+    mov [MAGIC_NUMBER], eax
+    ; Move the value of eax into infostruct_address
+    mov [INFOSTRUCT_ADDRESS], ebx
+
 
     ; call the main kernel function in src/lib.rs
     extern _start

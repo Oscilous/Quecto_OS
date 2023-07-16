@@ -12,7 +12,6 @@ start:
     call set_up_page_tables
     call enable_paging
 
-
     ; Printing status of succesful init of 32bit
     mov dword [0xb8000], 0x2f652f48
     mov dword [0xb8004], 0x2f6c2f6c

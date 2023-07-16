@@ -4,21 +4,8 @@
 mod pixel_buffer;
 
 use core::panic::PanicInfo;
-/*
-struct multiboot_tag_framebuffer {
-    uint64_t address;
-    uint32_t pitch;
-    uint32_t width;
-    uint32_t height;
-    uint8_t bpp;
-    uint8_t type;
-    // Technically, the layout of the following fields depends on the value of `type`
-    uint8_t red_position, red_mask_size;
-    uint8_t green_position, green_mask_size;
-    uint8_t blue_position, blue_mask_size;
-} __attribute__ ((packed)) fb_info_t;
-*/
 
+const MULTIBOOT2_BOOTLOADER_MAGIC: u64 = 0x36d76289;
 #[repr(C)]
 struct MultibootTag {
     typ: u32,
@@ -38,23 +25,22 @@ struct MultibootTagFramebuffer {
     reserved: u8,
 }
 
+static mut MAGIC_NUMBER: u64 = 0;
+static mut INFOSTRUCT_ADDRESS: u64 = 0;
+
 #[no_mangle]
 pub extern "C" fn _start(magic: u64, addr: u64) -> ! {
-    /*
-    let vga_buffer = 0xb8000 as *mut u8;
+    let magic_number: u64;
+    let infostruct_address: u64;
 
-    let magic: u64 = 111111;
-
-    let bytes = magic.to_le_bytes();
-
-    for (i, &byte) in bytes.iter().enumerate() {
-        unsafe {
-            *vga_buffer.offset(i as isize * 2) = byte;
-            *vga_buffer.offset(i as isize * 2 + 1) = 0xb;
-        }
+    unsafe {
+        magic_number = MAGIC_NUMBER;
+        infostruct_address = INFOSTRUCT_ADDRESS;
     }
-    */
-    let multiboot_magic = magic;
+
+    if magic_number != MULTIBOOT2_BOOTLOADER_MAGIC {
+        panic!();
+    }
     let multiboot_addr = addr;
     unsafe {
         // Convert the Multiboot address to a raw pointer
