@@ -1,14 +1,7 @@
 arch ?= x86_64
-kernel := build/quecto_kernel-$(arch).elf
+kernel := target/quecto_kernel-$(arch).elf
 iso := build/quecto_os-$(arch).iso
-target ?= $(arch)-quecto_os
-rust_os := target/$(target)/debug/libquecto_os.a
-
-linker_script := src/arch/$(arch)/linker.ld
 grub_cfg := src/arch/$(arch)/grub.cfg
-assembly_source_files := $(wildcard src/arch/$(arch)/*.asm)
-assembly_object_files := $(patsubst src/arch/$(arch)/%.asm, \
-	build/arch/$(arch)/%.o, $(assembly_source_files))
 
 .PHONY: run iso build
 
